@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link rel="stylesheet" href="js/libs/twitter-bootstrap/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="js/libs/twitter-bootstrap/css/bootstrap-theme.min.css"></link>
+        <script src="js/libs/jquery/jquery.min.js"></script>
+        <script src="js/libs/twitter-bootstrap/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+        #{request.userPrincipal}
+        <ul>
+            <ui:repeat value="#{allTickets}" var="ticket">
+                <li>
+                    <div>
+                        <div>#{ticket.subject}</div>
+                        <div>#{ticket.description}</div>
+                        <div>#{ticket.creator.name}</div>
+                        <div>#{ticket.ticketStatus}</div>
+                        <div>#{ticket.submittedDate}</div>
+                    </div>
+                </li>
+            </ui:repeat>
+        </ul>
+    </h:body>
+</html>
+
