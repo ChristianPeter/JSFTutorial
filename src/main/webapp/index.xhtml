@@ -26,6 +26,12 @@
                 </li>
             </ui:repeat>
         </ul>
+        
+        
+        <h:form>
+            #{logoutHelper}
+            <h:commandButton value="logout" action="#{logoutHelper.logout}"/>
+        </h:form>
     </h:body>
 </html>
 
