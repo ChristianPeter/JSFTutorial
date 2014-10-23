@@ -12,7 +12,7 @@
     </h:head>
     <h:body>
         Hello from Facelets
-        #{request.userPrincipal}
+        User: #{request.userPrincipal}
         <ul>
             <ui:repeat value="#{allTickets}" var="ticket">
                 <li>
