@@ -25,6 +25,7 @@ public class TicketResource {
     @PersistenceContext
     private EntityManager em;
 
+    /*
     @Resource
     private SessionContext context;
 
@@ -34,7 +35,30 @@ public class TicketResource {
 
         return q.getResultList();
     }
+    */
+    
+    public List<Ticket> findAll() {
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Ticket.class));
+        return em.createQuery(cq).getResultList();
+    }
 
+    public List<Ticket>findRange(int first, int maxresults) {
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Ticket.class));
+        javax.persistence.Query q = em.createQuery(cq);
+        q.setMaxResults(maxresults);
+        q.setFirstResult(first);
+        return q.getResultList();
+    }
+
+    public int count() {
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        javax.persistence.criteria.Root<Ticket> rt = cq.from(Ticket.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        javax.persistence.Query q = em.createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
+    }
     public void saveTicket(Ticket t) {
         em.persist(t);
     }

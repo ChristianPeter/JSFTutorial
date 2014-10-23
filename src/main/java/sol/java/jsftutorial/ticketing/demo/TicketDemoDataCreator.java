@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sol.java.jsftutorial.ticketing.demo;
 
 import java.util.Date;
@@ -22,46 +21,40 @@ import sol.java.jsftutorial.ticketing.entity.TicketUser;
 @Singleton
 @Startup
 public class TicketDemoDataCreator {
-    
+
     @Inject
     private TicketResource ticketResource;
-    
-    
+
+    private final String[] subjects = {"Harddisk broken", "Screen is black", "Cannot start windows", "Mails are lost", "My Mouse doesn't scroll", "Key lost", "Password forgotten"};
+    private final String[] descriptions = {"PC won't start. It makes strange noises.", "The screen is black and the lamp is off.", "Windows tries to start but a blue screen happens", "All my mails are gone!", "My Dog ate the key", "I've changed my password but cannot remember it."};
+
     @PostConstruct
-    public void init(){
+    public void init() {
+        System.out.println("postconstruct");
         TicketUser u1 = new TicketUser();
         u1.setEmail("dalton@test.com");
         u1.setName("Jack Dalton");
-        
+
         ticketResource.saveUser(u1);
-        
+
         TicketUser u2 = new TicketUser();
         u2 = new TicketUser();
         u2.setEmail("macgyver@test.com");
         u2.setName("MacGyver");
-        
+
         ticketResource.saveUser(u2);
-        
-        
-        Ticket t1 = new Ticket();
-        t1.setCreator(u1);
-        t1.setEditor(u2);
-        t1.setSubmittedDate(new Date());
-        t1.setDescription("Fix the plane. The landing gears are broken and we are gonna get out of fuel soon. Really soon. So hurry.");
-        t1.setSubject("Fix the Plane!");
-        
-        
-        ticketResource.saveTicket(t1);
-        
-        t1 = new Ticket();
-        t1.setCreator(u1);
-        t1.setEditor(u2);
-        t1.setSubmittedDate(new Date());
-        t1.setDescription("Fix the Reactor. It's leaking acid. Hurry, Mac!");
-        t1.setSubject("Fix the Reactor!");
-        
-        
-        ticketResource.saveTicket(t1);
-        
+
+        for (int i = 0; i < 10; i++) {
+            Ticket t1 = new Ticket();
+            t1.setCreator((i % 2 == 0) ? u1 : u2);
+            t1.setEditor((i % 2 == 1) ? u1 : u2);
+            t1.setSubmittedDate(new Date());
+            t1.setDescription(descriptions[i % descriptions.length]);
+            t1.setSubject(subjects[i % subjects.length]);
+
+            System.out.println("ticket " + t1);
+            ticketResource.saveTicket(t1);
+
+        }
     }
 }
