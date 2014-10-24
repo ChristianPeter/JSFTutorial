@@ -16,36 +16,40 @@
         #{ticketOverview.page}
         User: #{request.userPrincipal}
         <h:form>
-            
-            <h:commandButton value="prev" actionListener="#{ticketOverview.prev}">
-                <f:ajax render=":list pageNo" immediate="true"/>
-            </h:commandButton>
-            
-            <h:inputText value="#{ticketOverview.page}" id="pageNo">
-                <f:ajax event="change" render=":list" execute="@form" listener="#{ticketOverview.updateList}"/>
-            </h:inputText>
-            
-            <h:commandButton value="next" actionListener="#{ticketOverview.next}">
-                <f:ajax render=":list pageNo" immediate="true"/>
-            </h:commandButton>
-       
-        </h:form>
-        <h:panelGroup id="list">
 
-            <ul>            
-                <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
-                    <li>
-                        <div>
-                            <div>#{ticket.subject}</div>
-                            <div>#{ticket.description}</div>
-                            <div>#{ticket.creator.name}</div>
-                            <div>#{ticket.ticketStatus}</div>
-                            <div>#{ticket.submittedDate}</div>
-                        </div>
-                    </li>
-                </ui:repeat>
-            </ul>
-        </h:panelGroup>
+            <h:commandButton value="prev" actionListener="#{ticketOverview.prev}">
+                <f:ajax render=":tableForm:list pageNo" immediate="true"/>
+            </h:commandButton>
+
+            <h:inputText value="#{ticketOverview.page}" id="pageNo">
+                <f:ajax event="change" render=":tableForm:list" execute="@form" listener="#{ticketOverview.updateList}"/>
+            </h:inputText>
+
+            <h:commandButton value="next" actionListener="#{ticketOverview.next}">
+                <f:ajax render=":tableForm:list pageNo" immediate="true"/>
+            </h:commandButton>
+
+        </h:form>
+        <h:form id="tableForm">
+            <h:commandButton value="New ticket" action="#{ticketDetailPage.createTicket()}"/>
+            <h:panelGroup id="list">
+
+                <ul>            
+                    <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
+                        <li>
+                            <div>
+                                <div><h:commandLink value="edit" action="#{ticketDetailPage.editTicket(ticket)}"/></div>
+                                <div>#{ticket.subject}</div>
+                                <div>#{ticket.description}</div>
+                                <div>#{ticket.creator.name}</div>
+                                <div>#{ticket.ticketStatus}</div>
+                                <div>#{ticket.submittedDate}</div>
+                            </div>
+                        </li>
+                    </ui:repeat>
+                </ul>
+            </h:panelGroup>
+        </h:form>
 
 
         <h:form>
