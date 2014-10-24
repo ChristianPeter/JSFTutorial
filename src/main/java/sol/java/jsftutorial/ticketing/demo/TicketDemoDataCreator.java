@@ -6,6 +6,7 @@
 package sol.java.jsftutorial.ticketing.demo;
 
 import java.util.Date;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -21,7 +22,9 @@ import sol.java.jsftutorial.ticketing.entity.TicketUser;
 @Singleton
 @Startup
 public class TicketDemoDataCreator {
+    private static final Logger LOG = Logger.getLogger(TicketDemoDataCreator.class.getName());
 
+    
     @Inject
     private TicketResource ticketResource;
 
@@ -30,7 +33,6 @@ public class TicketDemoDataCreator {
 
     @PostConstruct
     public void init() {
-        System.out.println("postconstruct");
         TicketUser u1 = new TicketUser();
         u1.setEmail("dalton@test.com");
         u1.setName("Jack Dalton");
@@ -52,7 +54,7 @@ public class TicketDemoDataCreator {
             t1.setDescription(descriptions[i % descriptions.length]);
             t1.setSubject(subjects[i % subjects.length]);
 
-            System.out.println("ticket " + t1);
+            LOG.info(String.format("creating ticket %s: %s", i, t1.getSubject()));
             ticketResource.saveTicket(t1);
 
         }

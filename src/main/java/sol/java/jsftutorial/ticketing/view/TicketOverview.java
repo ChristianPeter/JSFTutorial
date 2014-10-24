@@ -8,6 +8,7 @@ package sol.java.jsftutorial.ticketing.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
@@ -24,13 +25,14 @@ import sol.java.jsftutorial.ticketing.entity.Ticket;
 @ViewScoped
 public class TicketOverview implements Serializable {
 
+    private static final Logger LOG = Logger.getLogger(TicketOverview.class.getName());
+    
     @Inject
     private TicketResource ticketResource;
 
     private int page = 0;
     private int pageSize = 5;
 
-    private String test = "test";
 
     /*
      @Produces
@@ -57,7 +59,7 @@ public class TicketOverview implements Serializable {
 
     @PostConstruct
     public void init() {
-
+        LOG.info("init()");
     }
 
     /*
@@ -65,7 +67,7 @@ public class TicketOverview implements Serializable {
      @RequestScoped
      @Named(value = "allTicketsPaginated")
      public List<Ticket> getAllPaginated() {
-     System.out.println("getAllPaginated!");
+     System.out.println(" private String test = "test";getAllPaginated!");
      System.out.println(getPage());
      System.out.println(getTest());
         
@@ -90,16 +92,21 @@ public class TicketOverview implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public String getTest() {
-        return test;
+    public void updateList(AjaxBehaviorEvent e) {
+        LOG.info(e.toString());
+        initTickets();
     }
 
-    public void setTest(String test) {
-        this.test = test;
+    public void next() {
+        page++;
+        initTickets();
     }
-    
-    public void updateList(AjaxBehaviorEvent e){
-        System.out.println(e);
+
+    public void prev() {
+        page--;
+        if (page < 0) {
+            page = 0;
+        }
         initTickets();
     }
 
