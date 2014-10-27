@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                template="/template/template.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{ticketDetailPageViewscoped.id}"/>
+            <f:viewAction action="#{ticketDetailPageViewscoped.loadTicket()}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="content">
+        <form jsf:id="form" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Subject</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="Subject" jsf:value="#{currentTicket.subject}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDesc" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="inputDesc" placeholder="Password" jsf:value="#{currentTicket.description}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                             Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" jsf:action="#{ticketDetailPageViewscoped.saveTicket()}">Save</button>
+                    <h:link styleClass="btn btn-danger" value="cancel" outcome="list"/>
+                </div>
+            </div>
+        </form>
+<!--
+        <h:form>
+            <h:inputText value="#{ticketDetailPageViewscoped.ticket.subject}"/>
+            <h:inputTextarea value="#{ticketDetailPageViewscoped.ticket.description}"/>
+            #{currentTicket.version}
+            <h:commandButton value="save" action="#{ticketDetailPageViewscoped.saveTicket()}"/>
+            <h:link value="cancel" outcome="list"/>
+        </h:form>
+-->
+    </ui:define>    
+</ui:composition>

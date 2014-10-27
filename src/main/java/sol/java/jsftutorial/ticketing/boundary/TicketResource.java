@@ -26,24 +26,27 @@ public class TicketResource {
     private EntityManager em;
 
     /*
-    @Resource
-    private SessionContext context;
+     @Resource
+     private SessionContext context;
 
-    public List<Ticket> getAllTickets() {
-        System.out.println("context: " + context.getCallerPrincipal().getName());
-        final TypedQuery<Ticket> q = em.createQuery("select t from Ticket t", Ticket.class);
+     public List<Ticket> getAllTickets() {
+     System.out.println("context: " + context.getCallerPrincipal().getName());
+     final TypedQuery<Ticket> q = em.createQuery("select t from Ticket t", Ticket.class);
 
-        return q.getResultList();
+     return q.getResultList();
+     }
+     */
+    public Ticket findById(String id) {
+        return em.find(Ticket.class, Long.valueOf(id));
     }
-    */
-    
+
     public List<Ticket> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Ticket.class));
         return em.createQuery(cq).getResultList();
     }
 
-    public List<Ticket>findRange(int first, int maxresults) {
+    public List<Ticket> findRange(int first, int maxresults) {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Ticket.class));
         javax.persistence.Query q = em.createQuery(cq);
@@ -59,6 +62,7 @@ public class TicketResource {
         javax.persistence.Query q = em.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+
     public void saveTicket(Ticket t) {
         em.persist(t);
     }

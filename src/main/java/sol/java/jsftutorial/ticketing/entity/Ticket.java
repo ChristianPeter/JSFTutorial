@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Version;
 
 /**
  *
@@ -32,6 +33,9 @@ public class Ticket implements Serializable {
 
     private String description;
 
+    @Version
+    private Long version;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date submittedDate;
 
@@ -43,6 +47,14 @@ public class Ticket implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private TicketUser editor;
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public Long getId() {
         return id;

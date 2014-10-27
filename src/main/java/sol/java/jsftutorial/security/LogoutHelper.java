@@ -35,7 +35,7 @@ public class LogoutHelper implements Serializable{
         if (session != null){
             session.invalidate();
             try {
-                extCtx.redirect("/JSFTutorial/login.html");
+                extCtx.redirect("/JSFTutorial");
             } catch (IOException ex) {
                 Logger.getLogger(LogoutHelper.class.getName()).log(Level.SEVERE, null, ex);
             }

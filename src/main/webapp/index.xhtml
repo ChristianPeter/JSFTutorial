@@ -5,13 +5,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       template="/template/template.xhtml">
     <ui:define name="content">
-        Hello from Facelets
-        User: #{request.userPrincipal}
-        <h:link value="tickets" outcome="ticket/list"/>
-        <h:form>
-            #{logoutHelper}
-            <h:commandButton value="logout" action="#{logoutHelper.logout}"/>
-        </h:form>
+     Hello User: #{request.userPrincipal}
+     <h:form>
+         <h:link value="goto tickets" outcome="ticket/list"/>
+     </h:form>
     </ui:define>
     
 </ui:composition>

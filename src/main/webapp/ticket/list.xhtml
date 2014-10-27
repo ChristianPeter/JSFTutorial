@@ -3,51 +3,55 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
                 template="/template/template.xhtml">
     <ui:define name="content">
-        Hello from Facelets
-        #{ticketOverview.page}
-        User: #{request.userPrincipal}
         <h:form>
 
-            <h:commandButton value="prev" actionListener="#{ticketOverview.prev}">
+            <input type="submit" class="btn btn-default" value="prev" jsf:actionListener="#{ticketOverview.prev}" >
                 <f:ajax render=":tableForm:list pageNo" immediate="true"/>
-            </h:commandButton>
+            </input>
 
-            <h:inputText value="#{ticketOverview.page}" id="pageNo">
-                <f:ajax event="change" render=":tableForm:list" execute="@form" listener="#{ticketOverview.updateList}"/>
-            </h:inputText>
-
-            <h:commandButton value="next" actionListener="#{ticketOverview.next}">
+            <input type="submit" class="btn btn-default" value="next" jsf:actionListener="#{ticketOverview.next}" >
                 <f:ajax render=":tableForm:list pageNo" immediate="true"/>
-            </h:commandButton>
+            </input>
+     
 
         </h:form>
         <h:form id="tableForm">
             <h:commandButton value="New ticket" action="#{ticketDetailPage.createTicket()}"/>
+            <h:link value="NewTicket" outcome="detailV2"/>
             <h:panelGroup id="list">
-
-                <ul>            
+                <h3>List of tickets. Page #{ticketOverview.page}</h3>
+                <table class="table table-striped">           
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Subject</th>
+                            <th>Description</th>
+                            <th>Creator</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
                     <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
-                        <li>
-                            <div>
-                                <div><h:commandLink value="edit" action="#{ticketDetailPage.editTicket(ticket)}"/></div>
-                                <div>#{ticket.subject}</div>
-                                <div>#{ticket.description}</div>
-                                <div>#{ticket.creator.name}</div>
-                                <div>#{ticket.ticketStatus}</div>
-                                <div>#{ticket.submittedDate}</div>
-                            </div>
-                        </li>
+                        <tr>
+                            <td>
+                                <h:commandLink value="edit" action="#{ticketDetailPage.editTicket(ticket)}"/>
+                                <h:link value="edit2" outcome="detailV2">
+                                    <f:param name="id" value="#{ticket.id}" />
+                                </h:link>
+                            </td>
+                            <td>#{ticket.subject}</td>
+                            <td>#{ticket.description}</td>
+                            <td>#{ticket.creator.name}</td>
+                            <td>#{ticket.ticketStatus}</td>
+                            <td>#{ticket.submittedDate}</td>
+                        </tr>
                     </ui:repeat>
-                </ul>
+                </table>
             </h:panelGroup>
         </h:form>
 
-
-        <h:form>
-            #{logoutHelper}
-            <h:commandButton value="logout" action="#{logoutHelper.logout}"/>
-        </h:form>
     </ui:define>
 </ui:composition>
