@@ -37,18 +37,11 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary" jsf:action="#{ticketDetailPageViewscoped.saveTicket()}">Save</button>
-                    <h:link styleClass="btn btn-danger" value="cancel" outcome="list"/>
+                    <h:button styleClass="btn btn-danger" value="cancel" outcome="list"/>
+                    
                 </div>
             </div>
         </form>
-<!--
-        <h:form>
-            <h:inputText value="#{ticketDetailPageViewscoped.ticket.subject}"/>
-            <h:inputTextarea value="#{ticketDetailPageViewscoped.ticket.description}"/>
-            #{currentTicket.version}
-            <h:commandButton value="save" action="#{ticketDetailPageViewscoped.saveTicket()}"/>
-            <h:link value="cancel" outcome="list"/>
-        </h:form>
--->
+
     </ui:define>    
 </ui:composition>

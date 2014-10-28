@@ -24,7 +24,7 @@ import sol.java.jsftutorial.ticketing.entity.Ticket;
  */
 @Named
 @ViewScoped
-@Join(path="/tickets", to="/ticket/list.xhtml")
+@Join(path="/tickets", to="/faces/ticket/list.xhtml")
 public class TicketOverview implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(TicketOverview.class.getName());
@@ -100,7 +100,10 @@ public class TicketOverview implements Serializable {
     }
 
     public void next() {
-        page++;
+        final int count = ticketResource.count();
+        if (page < Math.ceil(count /pageSize) -1){
+            page++;
+        }
         initTickets();
     }
 

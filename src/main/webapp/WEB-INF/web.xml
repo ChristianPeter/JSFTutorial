@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,21 +19,21 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>app</web-resource-name>
-            <url-pattern>/javax.faces.resource/*</url-pattern>
+            <url-pattern>/faces/javax.faces.resource/*</url-pattern>
         </web-resource-collection>
-        <!-- OMIT auth-constraint -->
     </security-constraint>
+    
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>app</web-resource-name>
             <description/>
-            <url-pattern>/*</url-pattern>            
+            <url-pattern>/faces/*</url-pattern>            
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -46,7 +46,7 @@
         <auth-method>FORM</auth-method>
         <realm-name>file</realm-name>
         <form-login-config>
-            <form-login-page>/login.xhtml</form-login-page>
+            <form-login-page>/faces/login.xhtml</form-login-page>
             <form-error-page>/error.html</form-error-page>
         </form-login-config>
     </login-config>

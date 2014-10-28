@@ -22,7 +22,7 @@ import sol.java.jsftutorial.ticketing.entity.Ticket;
  */
 @Named(value = "ticketDetailPageViewscoped")
 @ViewScoped
-@Join(path = "/tickets/{id}", to = "/ticket/detailV2.xhtml")
+@Join(path = "/tickets/{id}", to = "/faces/ticket/detailV2.xhtml")
 public class TicketDetailV2Page implements Serializable{
 
     private static final Logger LOG = Logger.getLogger(TicketDetailV2Page.class.getName());
