@@ -27,11 +27,10 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                             Remember me
-                        </label>
-                    </div>
+                    #{allTicketTags}
+                    <ui:repeat value="#{currentTicket.tags.toArray()}" var="t">
+                        <span>#{t.name}</span>
+                    </ui:repeat>
                 </div>
             </div>
             <div class="form-group">

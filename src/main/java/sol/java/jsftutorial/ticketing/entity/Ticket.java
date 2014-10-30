@@ -7,12 +7,19 @@ package sol.java.jsftutorial.ticketing.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
@@ -47,6 +54,12 @@ public class Ticket implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private TicketUser editor;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "RL_TICKET_TAG", joinColumns = {
+        @JoinColumn(name = "TICKET_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "TAG_ID")})
+    private Set<TicketTag> tags = new HashSet<>();
 
     public Long getVersion() {
         return version;
@@ -110,6 +123,14 @@ public class Ticket implements Serializable {
 
     public void setEditor(TicketUser editor) {
         this.editor = editor;
+    }
+
+    public Set<TicketTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<TicketTag> tags) {
+        this.tags = tags;
     }
 
     @Override

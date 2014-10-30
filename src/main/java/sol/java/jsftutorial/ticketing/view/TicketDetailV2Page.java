@@ -6,6 +6,7 @@
 package sol.java.jsftutorial.ticketing.view;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
@@ -15,6 +16,7 @@ import javax.inject.Named;
 import org.ocpsoft.rewrite.annotation.Join;
 import sol.java.jsftutorial.ticketing.boundary.TicketResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
+import sol.java.jsftutorial.ticketing.entity.TicketTag;
 
 /**
  *
@@ -23,7 +25,7 @@ import sol.java.jsftutorial.ticketing.entity.Ticket;
 @Named(value = "ticketDetailPageViewscoped")
 @ViewScoped
 @Join(path = "/tickets/{id}", to = "/faces/ticket/detailV2.xhtml")
-public class TicketDetailV2Page implements Serializable{
+public class TicketDetailV2Page implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(TicketDetailV2Page.class.getName());
 
@@ -36,23 +38,28 @@ public class TicketDetailV2Page implements Serializable{
 
     private String id; // provided by viewParam
 
+    @Produces
+    @Named(value = "allTicketTags")
+    public List<TicketTag> getAllTicketsTags() {
+        return ticketResource.getAllTicketsTags();
+    }
+
     public void loadTicket() {
         LOG.log(Level.INFO, "loading ticket for id {0}", id);
-        if (id!= null){
-        ticket = ticketResource.findById(id);
-        }
-        else {
+        if (id != null) {
+            ticket = ticketResource.findById(id);
+            LOG.info("TEST:" + ticket.getTags().size());
+        } else {
             // "create new ticket"
             ticket = new Ticket();
         }
         LOG.log(Level.INFO, "found ticket {0}", ticket.getSubject());
     }
-    
+
     public String saveTicket() {
         if (ticket.getId() == null) {
             ticketResource.saveTicket(ticket);
-        }
-        else{
+        } else {
             ticketResource.editTicket(ticket);
         }
         return "/ticket/list.xhtml?faces-redirect=true";

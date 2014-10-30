@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+            http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+        version="2.2">
+
+    <flow-definition id="flow1">
+         <start-node>step1</start-node>
+
+        <view id="step1">
+            <vdl-document>/flow1/step1.xhtml</vdl-document>
+        </view>
+        
+        <view id="step2">
+            <vdl-document>/flow1/step2.xhtml</vdl-document>
+        </view>
+        
+        <view id="final">
+            <vdl-document>/flow1/final.xhtml</vdl-document>
+        </view>
+        
+        <flow-return id="return">
+            <from-outcome>/index.xhtml</from-outcome>
+        </flow-return>
+        
+    </flow-definition>
+
+</faces-config>

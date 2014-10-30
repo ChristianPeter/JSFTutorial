@@ -3,11 +3,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://xmlns.jcp.org/jsf/component"
       template="/template/template.xhtml">
     <ui:define name="content">
+        
+        
      Hello User: #{request.userPrincipal}
      <h:form>
          <h:link value="goto tickets" outcome="ticket/list"/>
+         <b:row>
+             ROW1
+         </b:row>
+         <b:row>
+             ROW2
+         </b:row>
+         <h:link value="Start flow1" outcome="flow1"/>
      </h:form>
     </ui:define>
     

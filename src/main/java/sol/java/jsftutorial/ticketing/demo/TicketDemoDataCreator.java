@@ -5,7 +5,9 @@
  */
 package sol.java.jsftutorial.ticketing.demo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -13,6 +15,7 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import sol.java.jsftutorial.ticketing.boundary.TicketResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
+import sol.java.jsftutorial.ticketing.entity.TicketTag;
 import sol.java.jsftutorial.ticketing.entity.TicketUser;
 
 /**
@@ -45,6 +48,8 @@ public class TicketDemoDataCreator {
         u2.setName("MacGyver");
 
         ticketResource.saveUser(u2);
+        
+        final List<TicketTag> tags = generateTags();
 
         for (int i = 0; i < 10; i++) {
             Ticket t1 = new Ticket();
@@ -53,10 +58,32 @@ public class TicketDemoDataCreator {
             t1.setSubmittedDate(new Date());
             t1.setDescription(descriptions[i % descriptions.length]);
             t1.setSubject(subjects[i % subjects.length]);
+            t1.getTags().add(tags.get(i % tags.size()));
 
             LOG.info(String.format("creating ticket %s: %s", i, t1.getSubject()));
             ticketResource.saveTicket(t1);
 
         }
+    }
+    
+    public List<TicketTag> generateTags(){
+        List<TicketTag> tags = new ArrayList<>();
+        
+        TicketTag tag = new TicketTag();
+        tag.setName("Hardware");
+        tags.add(tag);
+        
+        tag = new TicketTag();
+        tag.setName("Weather");
+        tags.add(tag);
+        
+        tag = new TicketTag();
+        tag.setName("Psychological");
+        tags.add(tag);
+        
+        tag = new TicketTag();
+        tag.setName("Pet related");
+        tags.add(tag);
+        return tags;
     }
 }

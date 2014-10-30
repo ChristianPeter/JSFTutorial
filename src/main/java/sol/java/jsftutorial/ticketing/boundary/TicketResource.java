@@ -6,13 +6,11 @@
 package sol.java.jsftutorial.ticketing.boundary;
 
 import java.util.List;
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
+import sol.java.jsftutorial.ticketing.entity.TicketTag;
 import sol.java.jsftutorial.ticketing.entity.TicketUser;
 
 /**
@@ -79,4 +77,9 @@ public class TicketResource {
         em.persist(u);
     }
 
+    public List<TicketTag> getAllTicketsTags() {
+        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(TicketTag.class));
+        return em.createQuery(cq).getResultList();
+    }
 }

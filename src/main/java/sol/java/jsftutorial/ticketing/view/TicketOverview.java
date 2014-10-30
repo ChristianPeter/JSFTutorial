@@ -101,7 +101,8 @@ public class TicketOverview implements Serializable {
 
     public void next() {
         final int count = ticketResource.count();
-        if (page < Math.ceil(count /pageSize) -1){
+        final double sizer = (double)count /pageSize;
+        if (page+1 < sizer ){
             page++;
         }
         initTickets();
