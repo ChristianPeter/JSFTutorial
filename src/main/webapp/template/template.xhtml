@@ -11,7 +11,7 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Facelets Template</title>
+        <title>#{pageTitle}</title>
         <h:outputStylesheet name="./js/libs/twitter-bootstrap/css/bootstrap.min.css"/>
         <h:outputStylesheet name="./js/libs/twitter-bootstrap/css/bootstrap-theme.min.css"/>
         <h:outputStylesheet name="./css/main.css"/>
@@ -36,8 +36,10 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li class="active"><a href="/JSFTutorial">Home</a></li>
+                        <li><h:link value="Tickets_C" outcome="/ticket/list"/></li>
+                        <li><h:link value="Tickets_V" outcome="/ticket/listV2"/></li>
+                        <li><h:link value="Flow1" outcome="flow1"/></li>
                         <li><a href="#contact">Contact</a></li>                        
                     </ul>
                         <h:form class="navbar-form navbar-right" role="form">

@@ -4,6 +4,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 template="/template/template.xhtml">
+    <ui:param name="pageTitle" value="ViewScoped details for ticket #{currentTicket.id}"/>
     <ui:define name="metadata">
         <f:metadata>
             <f:viewParam name="id" value="#{ticketDetailPageViewscoped.id}"/>

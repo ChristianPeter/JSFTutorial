@@ -13,7 +13,7 @@ import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.ocpsoft.rewrite.annotation.Join;
+//import org.ocpsoft.rewrite.annotation.Join;
 import sol.java.jsftutorial.ticketing.boundary.TicketResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
 import sol.java.jsftutorial.ticketing.entity.TicketTag;
@@ -24,7 +24,7 @@ import sol.java.jsftutorial.ticketing.entity.TicketTag;
  */
 @Named(value = "ticketDetailPageViewscoped")
 @ViewScoped
-@Join(path = "/tickets/{id}", to = "/faces/ticket/detailV2.xhtml")
+//@Join(path = "/tickets/{id}", to = "/faces/ticket/detailV2.xhtml")
 public class TicketDetailV2Page implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(TicketDetailV2Page.class.getName());

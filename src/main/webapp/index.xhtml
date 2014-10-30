@@ -5,12 +5,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://xmlns.jcp.org/jsf/component"
       template="/template/template.xhtml">
+    <ui:param name="pageTitle" value="Welcome"/>
     <ui:define name="content">
         
         
      Hello User: #{request.userPrincipal}
      <h:form>
-         <h:link value="goto tickets" outcome="ticket/list"/>
+         <h:link value="goto tickets Conversationscoped" outcome="ticket/list"/>
+         <h:link value="goto tickets Viewscoped" outcome="ticket/listV2"/>
          <b:row>
              ROW1
          </b:row>

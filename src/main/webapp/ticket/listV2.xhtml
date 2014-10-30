@@ -5,7 +5,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 template="/template/template.xhtml">
-    <ui:param name="pageTitle" value="Tickets Conversationscoped"/>
+    <ui:param name="pageTitle" value="Tickets Viewscoped"/>
     <ui:define name="content">
         <h:form>
 
@@ -20,7 +20,7 @@
 
         </h:form>
         <h:form id="tableForm">
-            <h:commandButton value="New ticket" action="#{ticketDetailPage.createTicket()}"/>
+            <h:link value="NewTicket" outcome="detailV2"/>
             <h:panelGroup id="list">
                 <h3>List of tickets. Page #{ticketOverview.page}</h3>
                 <table class="table table-striped">           
@@ -37,7 +37,9 @@
                     <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
                         <tr>
                             <td>
-                                <h:commandLink value="edit" action="#{ticketDetailPage.editTicket(ticket)}"/>
+                                <h:link value="edit2" outcome="detailV2">
+                                    <f:param name="id" value="#{ticket.id}" />
+                                </h:link>
                             </td>
                             <td>#{ticket.subject}</td>
                             <td>#{ticket.description}</td>

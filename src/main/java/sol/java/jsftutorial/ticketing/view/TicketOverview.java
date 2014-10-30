@@ -14,7 +14,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.ocpsoft.rewrite.annotation.Join;
+//import org.ocpsoft.rewrite.annotation.Join;
 import sol.java.jsftutorial.ticketing.boundary.TicketResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
 
@@ -24,7 +24,7 @@ import sol.java.jsftutorial.ticketing.entity.Ticket;
  */
 @Named
 @ViewScoped
-@Join(path="/tickets", to="/faces/ticket/list.xhtml")
+//@Join(path="/tickets", to="/faces/ticket/list.xhtml")
 public class TicketOverview implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(TicketOverview.class.getName());
