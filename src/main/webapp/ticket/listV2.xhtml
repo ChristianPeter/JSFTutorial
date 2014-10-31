@@ -7,20 +7,9 @@
                 template="/template/template.xhtml">
     <ui:param name="pageTitle" value="Tickets Viewscoped"/>
     <ui:define name="content">
-        <h:form>
 
-            <input type="submit" class="btn btn-default" value="prev" jsf:actionListener="#{ticketOverview.prev}" >
-                <f:ajax render=":tableForm:list pageNo" immediate="true"/>
-            </input>
-
-            <input type="submit" class="btn btn-default" value="next" jsf:actionListener="#{ticketOverview.next}" >
-                <f:ajax render=":tableForm:list pageNo" immediate="true"/>
-            </input>
-     
-
-        </h:form>
         <h:form id="tableForm">
-            <h:link value="NewTicket" outcome="detailV2"/>
+            <h:link styleClass="btn btn-primary" value="NewTicket" outcome="detailV2"/>
             <h:panelGroup id="list">
                 <h3>List of tickets. Page #{ticketOverview.page}</h3>
                 <table class="table table-striped">           
@@ -38,9 +27,12 @@
                     <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
                         <tr>
                             <td>
-                                <h:link value="edit2" outcome="detailV2">
+                                <h:link styleClass="glyphicon glyphicon-pencil" value="" outcome="detailV2">
                                     <f:param name="id" value="#{ticket.id}" />
                                 </h:link>
+                                <h:commandLink styleClass="glyphicon glyphicon-remove" action="#{ticketOverview.deleteTicket(ticket)}">
+                                    <f:ajax render="@all"/>
+                                </h:commandLink>
                             </td>
                             <td>#{ticket.subject}</td>
                             <td>#{ticket.description}</td>
@@ -54,5 +46,23 @@
             </h:panelGroup>
         </h:form>
 
+        <h:form>
+            <div class="row">
+
+                <div class="col-sm-1">
+
+                    <a href='#' class="glyphicon glyphicon-backward" jsf:actionListener="#{ticketOverview.prev}" >
+                        <f:ajax render=":tableForm:list pageNo" immediate="true"/>
+                    </a>
+                </div>
+
+                <div class="col-sm-1 pull-right">
+                    <a href='#' class="glyphicon glyphicon-forward" jsf:actionListener="#{ticketOverview.next}" >
+                        <f:ajax render=":tableForm:list pageNo" immediate="true"/>
+                    </a>
+                </div>
+
+            </div>
+        </h:form>
     </ui:define>
 </ui:composition>

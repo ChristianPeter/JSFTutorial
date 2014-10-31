@@ -120,5 +120,12 @@ public class TicketOverview implements Serializable {
         allTicketsPaginated.clear();
         allTicketsPaginated.addAll(ticketResource.findRange(page * pageSize, pageSize));
     }
+    
+    public String deleteTicket(Ticket ticket){
+        LOG.info("delete ticket " +ticket.getSubject());
+        ticketResource.deleteTicket(ticket);
+        initTickets();
+        return null;
+    }
 
 }

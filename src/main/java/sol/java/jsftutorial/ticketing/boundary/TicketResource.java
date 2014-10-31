@@ -66,11 +66,12 @@ public class TicketResource {
         em.persist(t);
     }
 
-    public void editTicket(Ticket t) {
-        em.merge(t);
+    public Ticket editTicket(Ticket t) {
+        return em.merge(t);
     }
 
     public void deleteTicket(Ticket t) {
+        t = em.find(Ticket.class, t.getId()); // hmmmmmm is this the best way to do that??
         em.remove(t);
     }
 

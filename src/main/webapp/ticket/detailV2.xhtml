@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <h:selectManyCheckbox id="tags" value="#{currentTicket.tags}" >
+                    <h:selectManyCheckbox id="tags" value="#{currentTicket.tags}" layout="pageDirection" >
                         <f:selectItems value="#{ticketDetailPageViewscoped.allTicketsTags}" var="item" itemLabel="#{item.name}" itemValue="#{item}"/>
                         <f:converter converterId="ticketTagConverter"/>
                     </h:selectManyCheckbox>
