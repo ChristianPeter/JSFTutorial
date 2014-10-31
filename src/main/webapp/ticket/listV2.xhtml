@@ -10,40 +10,46 @@
 
         <h:form id="tableForm">
             <h:link styleClass="btn btn-primary" value="NewTicket" outcome="detailV2"/>
-            <h:panelGroup id="list">
-                <h3>List of tickets. Page #{ticketOverview.page}</h3>
-                <table class="table table-striped">           
-                    <thead>
-                        <tr>
-                            <th>Action</th>
-                            <th>Subject</th>
-                            <th>Description</th>
-                            <th>Creator</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>UUID</th>
-                        </tr>
-                    </thead>
-                    <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
-                        <tr>
-                            <td>
-                                <h:link styleClass="glyphicon glyphicon-pencil" value="" outcome="detailV2">
-                                    <f:param name="id" value="#{ticket.id}" />
-                                </h:link>
-                                <h:commandLink styleClass="glyphicon glyphicon-remove" action="#{ticketOverview.deleteTicket(ticket)}">
-                                    <f:ajax render="@all"/>
-                                </h:commandLink>
-                            </td>
-                            <td>#{ticket.subject}</td>
-                            <td>#{ticket.description}</td>
-                            <td>#{ticket.creator.name}</td>
-                            <td>#{ticket.ticketStatus}</td>
-                            <td>#{ticket.submittedDate}</td>
-                            <td>#{ticket.uuid}</td>
-                        </tr>
-                    </ui:repeat>
-                </table>
-            </h:panelGroup>
+            <h:dataTable id="ticketTable" value="#{ticketOverview.allTicketsPaginated}" var="ticket" styleClass="table table-striped">
+                <f:facet name="header"><h3>List of Tickets</h3></f:facet>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:link value="" outcome="detailV2">
+                        <f:param name="id" value="#{ticket.id}" />
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </h:link>
+                    <h:commandLink action="#{ticketOverview.deleteTicket(ticket)}">
+                        <f:ajax render="@all"/>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Subject</f:facet>
+                        #{ticket.subject}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                        #{ticket.description}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Creator</f:facet>
+                        #{ticket.creator.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                        #{ticket.ticketStatus}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">UUID</f:facet>
+                        #{ticket.uuid}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Version</f:facet>
+                        #{ticket.version}
+                </h:column>
+            </h:dataTable>
+
+
         </h:form>
 
         <h:form>
@@ -52,13 +58,13 @@
                 <div class="col-sm-1">
 
                     <a href='#' class="glyphicon glyphicon-backward" jsf:actionListener="#{ticketOverview.prev}" >
-                        <f:ajax render=":tableForm:list pageNo" immediate="true"/>
+                        <f:ajax render=":tableForm:ticketTable pageNo" immediate="true"/>
                     </a>
                 </div>
 
                 <div class="col-sm-1 pull-right">
                     <a href='#' class="glyphicon glyphicon-forward" jsf:actionListener="#{ticketOverview.next}" >
-                        <f:ajax render=":tableForm:list pageNo" immediate="true"/>
+                        <f:ajax render=":tableForm:ticketTable pageNo" immediate="true"/>
                     </a>
                 </div>
 

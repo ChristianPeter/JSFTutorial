@@ -27,10 +27,28 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="inputEditor" class="col-sm-2 control-label">Assigned To</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#{currentTicket.editor.name}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputCreator" class="col-sm-2 control-label">Created By</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#{currentTicket.creator.name}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastModified" class="col-sm-2 control-label">Last Modified</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">#{currentTicket.lastModified}</p>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <h:selectManyCheckbox id="tags" value="#{currentTicket.tags}" layout="pageDirection" >
                         <f:selectItems value="#{ticketDetailPageViewscoped.allTicketsTags}" var="item" itemLabel="#{item.name}" itemValue="#{item}"/>
-                        <f:converter converterId="ticketTagConverter"/>
+                        <f:converter converterId="entityConverter"/>
                     </h:selectManyCheckbox>
                     
                     <h:panelGroup id="newtag">

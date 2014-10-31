@@ -91,8 +91,9 @@ public class TicketDetailV2Page implements Serializable {
         t.getTickets().add(ticket);
         ticket.getTags().add(t);
 
-        ticketResource.saveTag(t);
-        initAllTicketTags();
+        allTicketTags.add(t);
+        //ticketResource.saveTag(t);
+        //initAllTicketTags();
 
         newTag = "";
         return null;
