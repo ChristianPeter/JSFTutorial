@@ -9,11 +9,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-//import org.ocpsoft.rewrite.annotation.Join;
 import sol.java.jsftutorial.ticketing.boundary.TicketResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
 import sol.java.jsftutorial.ticketing.entity.TicketTag;
@@ -38,10 +38,29 @@ public class TicketDetailV2Page implements Serializable {
 
     private String id; // provided by viewParam
 
-    @Produces
-    @Named(value = "allTicketTags")
+    private String newTag;
+
+    private List<TicketTag> allTicketTags;
+
+    @PostConstruct
+    public void init() {
+        initAllTicketTags();
+    }
+
+    public void initAllTicketTags() {
+        if (allTicketTags == null) {
+            allTicketTags = ticketResource.getAllTicketsTags();
+        } else {
+            allTicketTags.clear();
+            allTicketTags.addAll(ticketResource.getAllTicketsTags());
+        }
+    }
+//    @Produces
+//    @RequestScoped
+//    @Named(value = "allTicketTags")
+
     public List<TicketTag> getAllTicketsTags() {
-        return ticketResource.getAllTicketsTags();
+        return allTicketTags;
     }
 
     public void loadTicket() {
@@ -62,10 +81,24 @@ public class TicketDetailV2Page implements Serializable {
         } else {
             ticketResource.editTicket(ticket);
         }
-        return "/ticket/list.xhtml?faces-redirect=true";
+        return "/ticket/listV2.xhtml?faces-redirect=true";
     }
 
+    public String addNewTag() {
+        LOG.info("new tag: " + newTag);
+        TicketTag t = new TicketTag();
+        t.setName(newTag);
+        t.getTickets().add(ticket);
+        ticket.getTags().add(t);
+
+        ticketResource.saveTag(t);
+        initAllTicketTags();
+
+        newTag = "";
+        return null;
+    }
     /* getters & setters */
+
     public Ticket getTicket() {
         return ticket;
     }
@@ -80,6 +113,14 @@ public class TicketDetailV2Page implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNewTag() {
+        return newTag;
+    }
+
+    public void setNewTag(String newTag) {
+        this.newTag = newTag;
     }
 
 }

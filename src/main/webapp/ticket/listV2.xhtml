@@ -32,6 +32,7 @@
                             <th>Creator</th>
                             <th>Status</th>
                             <th>Date</th>
+                            <th>UUID</th>
                         </tr>
                     </thead>
                     <ui:repeat value="#{ticketOverview.allTicketsPaginated}" var="ticket">
@@ -46,6 +47,7 @@
                             <td>#{ticket.creator.name}</td>
                             <td>#{ticket.ticketStatus}</td>
                             <td>#{ticket.submittedDate}</td>
+                            <td>#{ticket.uuid}</td>
                         </tr>
                     </ui:repeat>
                 </table>

@@ -28,16 +28,24 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    #{allTicketTags}
-                    <ui:repeat value="#{currentTicket.tags.toArray()}" var="t">
-                        <span>#{t.name}</span>
-                    </ui:repeat>
+                    <h:selectManyCheckbox id="tags" value="#{currentTicket.tags}" >
+                        <f:selectItems value="#{ticketDetailPageViewscoped.allTicketsTags}" var="item" itemLabel="#{item.name}" itemValue="#{item}"/>
+                        <f:converter converterId="ticketTagConverter"/>
+                    </h:selectManyCheckbox>
+                    
+                    <h:panelGroup id="newtag">
+                        <h:inputText value="#{ticketDetailPageViewscoped.newTag}">
+                        </h:inputText>
+                        <h:commandButton value="Create new Tag" action="#{ticketDetailPageViewscoped.addNewTag()}">
+                            <f:ajax render="@all" execute="@form"/>
+                        </h:commandButton>
+                    </h:panelGroup>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary" jsf:action="#{ticketDetailPageViewscoped.saveTicket()}">Save</button>
-                    <h:button styleClass="btn btn-danger" value="cancel" outcome="list"/>
+                    <h:button styleClass="btn btn-danger" value="cancel" outcome="listV2"/>
                     
                 </div>
             </div>

@@ -21,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
 
@@ -29,19 +30,13 @@ import javax.persistence.Version;
  * @author debiandev
  */
 @Entity
-public class Ticket implements Serializable {
+public class Ticket extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     private String subject;
 
     private String description;
-
-    @Version
-    private Long version;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date submittedDate;
@@ -55,27 +50,16 @@ public class Ticket implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private TicketUser editor;
 
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+//    @JoinTable(name = "RL_TICKET_TAG", joinColumns = {
+//        @JoinColumn(name = "TICKET_ID")}, inverseJoinColumns = {
+//        @JoinColumn(name = "TAG_ID")})
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "RL_TICKET_TAG", joinColumns = {
-        @JoinColumn(name = "TICKET_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "TAG_ID")})
     private Set<TicketTag> tags = new HashSet<>();
 
-    public Long getVersion() {
-        return version;
-    }
+    
 
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
 
     public String getDescription() {
         return description;
@@ -133,29 +117,11 @@ public class Ticket implements Serializable {
         this.tags = tags;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ticket)) {
-            return false;
-        }
-        Ticket other = (Ticket) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
+    
+    
     @Override
     public String toString() {
-        return "sol.java.jsftutorial.ticketing.entity.Ticket[ id=" + id + " ]";
+        return "Ticket[ id=" + getId() + " ]";
     }
 
 }

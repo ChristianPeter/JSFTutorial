@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
 import sol.java.jsftutorial.ticketing.entity.TicketTag;
 import sol.java.jsftutorial.ticketing.entity.TicketUser;
@@ -77,9 +78,30 @@ public class TicketResource {
         em.persist(u);
     }
 
+    public void saveTag(TicketTag t){
+        em.persist(t);
+    }
     public List<TicketTag> getAllTicketsTags() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(TicketTag.class));
         return em.createQuery(cq).getResultList();
     }
+    
+    public TicketTag findByName(String name){
+        final TypedQuery<TicketTag> query = em.createQuery("from TicketTag t where t.name = :n", TicketTag.class);
+        query.setParameter("n", name);
+        return query.getSingleResult();
+    }
+    
+    public TicketTag findTagByUuid(String uuid){
+        final TypedQuery<TicketTag> query = em.createQuery("from TicketTag t where t.uuid = :n", TicketTag.class);
+        query.setParameter("n", uuid);
+        return query.getSingleResult();
+    }
+    
+    public TicketTag findTagById(String id) {
+        return em.find(TicketTag.class, Long.valueOf(id));
+    }
+    
+    
 }
