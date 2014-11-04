@@ -29,7 +29,11 @@
             <div class="form-group">
                 <label for="inputEditor" class="col-sm-2 control-label">Assigned To</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">#{currentTicket.editor.name}</p>
+                    <!--<p class="form-control-static">#{currentTicket.editor.name}</p>-->
+                    <h:selectOneMenu styleClass="form-control" id="inputEditor" value="#{currentTicket.editor}">
+                        <f:selectItems value="#{allUsers}" var="item" itemLabel="#{item.name}" itemValue="#{item}"/>
+                        <f:converter converterId="entityConverter"/>
+                    </h:selectOneMenu>
                 </div>
             </div>
             <div class="form-group">
@@ -67,6 +71,7 @@
                     
                 </div>
             </div>
+            
         </form>
 
     </ui:define>    

@@ -11,3 +11,8 @@ and open the template in the editor.
 body{
     margin-top: 70px;
 }
+
+.navbar form{
+    margin-top: 0px;
+     margin-bottom: 0px; 
+}

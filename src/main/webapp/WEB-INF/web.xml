@@ -4,6 +4,10 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <context-param>
+        <param-name>javax.faces.CLIENT_WINDOW_MODE</param-name>
+        <param-value>url</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -22,18 +26,19 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     
+    <!--
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>app</web-resource-name>
             <url-pattern>/faces/javax.faces.resource/*</url-pattern>
         </web-resource-collection>
     </security-constraint>
-    
+    -->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>app</web-resource-name>
             <description/>
-            <url-pattern>/faces/*</url-pattern>            
+            <url-pattern>/faces/ticket/*</url-pattern>            
         </web-resource-collection>
         <auth-constraint>
             <description/>

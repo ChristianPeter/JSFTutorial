@@ -1,27 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://xmlns.jcp.org/jsf/component"
-      template="/template/template.xhtml">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://xmlns.jcp.org/jsf/component"
+                template="/template/template.xhtml">
     <ui:param name="pageTitle" value="Welcome"/>
     <ui:define name="content">
-        
-        
-     Hello User: #{request.userPrincipal}
-     <h:form>
-         <h:link value="goto tickets Conversationscoped" outcome="ticket/list"/>
-         <h:link value="goto tickets Viewscoped" outcome="ticket/listV2"/>
-         <b:row>
-             ROW1
-         </b:row>
-         <b:row>
-             ROW2
-         </b:row>
-         <h:link value="Start flow1" outcome="flow1"/>
-     </h:form>
+
+
+
+        <div class="jumbotron">
+            <h1>Hello User: #{request.userPrincipal}</h1>
+            <p>...</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+
+        <h:form>
+            <h:link value="goto tickets Conversationscoped" outcome="ticket/list"/>
+            <h:link value="goto tickets Viewscoped" outcome="ticket/listV2"/>
+            <b:row>
+                ROW1
+            </b:row>
+            <b:row>
+                ROW2
+            </b:row>
+            <h:link value="Start flow1" outcome="flow1"/>
+        </h:form>
     </ui:define>
-    
+
 </ui:composition>
 

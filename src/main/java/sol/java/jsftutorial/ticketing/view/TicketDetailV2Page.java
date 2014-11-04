@@ -15,8 +15,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import sol.java.jsftutorial.ticketing.boundary.TicketResource;
+import sol.java.jsftutorial.ticketing.boundary.TicketUserResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
 import sol.java.jsftutorial.ticketing.entity.TicketTag;
+import sol.java.jsftutorial.ticketing.entity.TicketUser;
 
 /**
  *
@@ -31,6 +33,9 @@ public class TicketDetailV2Page implements Serializable {
 
     @Inject
     private TicketResource ticketResource;
+    
+    @Inject
+    private TicketUserResource userResource;
 
     @Produces
     @Named("currentTicket")
@@ -55,10 +60,15 @@ public class TicketDetailV2Page implements Serializable {
             allTicketTags.addAll(ticketResource.getAllTicketsTags());
         }
     }
-//    @Produces
+    @Produces
 //    @RequestScoped
-//    @Named(value = "allTicketTags")
-
+    @ViewScoped
+    @Named(value = "allUsers")
+    public List<TicketUser> getAllUsers(){
+        LOG.info("init all Users List");
+        return userResource.findAll();
+    }
+    
     public List<TicketTag> getAllTicketsTags() {
         return allTicketTags;
     }
