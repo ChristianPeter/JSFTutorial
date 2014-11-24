@@ -4,6 +4,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:b="http://xmlns.jcp.org/jsf/component"
+                xmlns:m="http://mehrfaces.korra.sol/ui"
                 template="/template/template.xhtml">
     <ui:param name="pageTitle" value="Welcome"/>
     <ui:param name="pageId" value="Home"/>
@@ -15,6 +16,7 @@
             <h1>Hello User: #{request.userPrincipal}</h1>
             <p>...</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+            <m:demo>TEST</m:demo>
         </div>
 
         <h:form>
@@ -28,6 +30,9 @@
             </b:row>
             <h:link value="Start flow1" outcome="flow1"/>
         </h:form>
+
+
+        
     </ui:define>
 
 </ui:composition>

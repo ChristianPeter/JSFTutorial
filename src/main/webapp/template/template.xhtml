@@ -79,5 +79,24 @@
         <div class="container">
             <ui:insert name="content">Content</ui:insert>
         </div>
+        
+        
+        <!-- WS handling -->
+        
+        <script>
+            console.log('test');
+            var wsocket;
+            var serviceLocation = "ws://localhost:8080/JSFTutorial/ticketstatus";
+            $(document).ready(function() {
+                
+                wsocket = new WebSocket(serviceLocation);
+		wsocket.onmessage = onMessageReceived;
+                
+            });
+            
+            function onMessageReceived(evt) {
+                console.log(evt);
+            }
+        </script>
     </h:body>
 </html>

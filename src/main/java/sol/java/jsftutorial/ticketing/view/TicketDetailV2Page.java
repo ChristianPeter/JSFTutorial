@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.enterprise.event.Event;
+import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ import sol.java.jsftutorial.ticketing.boundary.TicketUserResource;
 import sol.java.jsftutorial.ticketing.entity.Ticket;
 import sol.java.jsftutorial.ticketing.entity.TicketTag;
 import sol.java.jsftutorial.ticketing.entity.TicketUser;
+import sol.java.jsftutorial.ws.TicketEvent;
 
 /**
  *
@@ -47,6 +50,9 @@ public class TicketDetailV2Page implements Serializable {
 
     private List<TicketTag> allTicketTags;
 
+    @Inject
+    private Event<TicketEvent> ticketEvent;
+    
     @PostConstruct
     public void init() {
         initAllTicketTags();
@@ -91,6 +97,8 @@ public class TicketDetailV2Page implements Serializable {
         } else {
             ticketResource.editTicket(ticket);
         }
+        LOG.info("sending ticket event");
+        ticketEvent.fire(new TicketEvent());
         return "/ticket/listV2.xhtml?faces-redirect=true";
     }
 
@@ -134,4 +142,5 @@ public class TicketDetailV2Page implements Serializable {
         this.newTag = newTag;
     }
 
+    
 }
